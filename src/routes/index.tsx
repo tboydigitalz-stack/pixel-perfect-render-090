@@ -15,6 +15,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { AnimatedStat } from "@/components/AnimatedStat";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import cvAsset from "@/assets/Daniel_CV_v4.docx.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -26,7 +27,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Portfolio of Adeyemi Erioluwa Daniel, Computer Science student, founder of Conversion Alchemist and builder of MyAcumen. 14,000 plus leads generated and a 5.0 GPA.",
+          "Portfolio of Adeyemi Erioluwa Daniel, Computer Science student, founder of Conversion Alchemist and builder of MyAcumen. 14,000 plus leads generated and a 4.47 CGPA.",
       },
       {
         name: "keywords",
@@ -64,10 +65,10 @@ const projects = [
     title: "MyAcumen",
     subtitle: "Offline First AI Powered Student Study OS",
     description:
-      "Built entirely alone in three months because I was failing without it. An offline first study platform with CBT practice, AI tutor, Pomodoro focus sessions, mistake tracking, and progress analytics. This semester I achieved a 5.0 GPA using MyAcumen.",
+      "Built entirely alone in three months because I was failing without it. An offline first study platform with CBT practice, AI tutor, Pomodoro focus sessions, mistake tracking, and progress analytics. My 200 level first semester CGPA is 4.47, and I am expecting a 5.0 this semester once results are released.",
     stats: [
       { value: "3 months", label: "Build time" },
-      { value: "5.0 GPA", label: "This semester" },
+      { value: "4.47", label: "1st sem CGPA" },
       { value: "Dec 2026", label: "Launch date" },
     ],
     primary: {
@@ -163,7 +164,7 @@ const cvCards = [
       "Best Student, 100 level Computer Science, 2023 and 2024 session",
       "First Class standing throughout 100 level",
       "Built 3 products while studying full time",
-      "5.0 GPA in 200 level second semester",
+      "4.47 CGPA at 200 level first semester",
     ],
   },
 ];
@@ -214,7 +215,7 @@ function Index() {
       <header className="no-print sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-md">
         <nav
           aria-label="Primary"
-          className="section-shell flex h-16 items-center justify-between"
+          className="section-shell flex flex-wrap items-center justify-between gap-y-2 py-3 md:h-16 md:flex-nowrap md:py-0"
         >
           <a
             href="#hero"
@@ -226,24 +227,33 @@ function Index() {
           <ul className="hidden gap-7 text-sm text-secondary-foreground md:flex">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="transition-colors hover:text-primary-bright"
-                >
+                <a href={link.href} className="transition-colors hover:text-primary-bright">
                   {link.label}
                 </a>
               </li>
             ))}
           </ul>
-          <a
-            href={cvAsset.url}
-            download="Adeyemi_Erioluwa_Daniel_CV.docx"
-            className="btn-outline !px-4 !py-2 !text-xs"
-            aria-label="Download full CV"
-          >
-            <Download aria-hidden="true" className="size-4" />
-            CV
-          </a>
+          <ul className="order-3 flex w-full justify-center gap-3 text-secondary-foreground md:hidden">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} className="text-xs transition-colors hover:text-primary-bright">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <a
+              href={cvAsset.url}
+              download="Adeyemi_Erioluwa_Daniel_CV.docx"
+              className="btn-outline !px-4 !py-2 !text-xs"
+              aria-label="Download full CV"
+            >
+              <Download aria-hidden="true" className="size-4" />
+              CV
+            </a>
+          </div>
         </nav>
       </header>
 
@@ -280,14 +290,9 @@ function Index() {
 
             <dl className="mt-14 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
               <AnimatedStat value={14000} suffix="+" label="Leads generated" />
-              <AnimatedStat
-                value={3.68}
-                suffix="M"
-                decimals={2}
-                label="Naira ad spend"
-              />
+              <AnimatedStat value={3.68} suffix="M" decimals={2} label="Naira ad spend" />
               <AnimatedStat value={20} suffix="x" label="Peak ROAS" />
-              <AnimatedStat value={5} suffix=".0" decimals={1} label="Current GPA" />
+              <AnimatedStat value={4.47} decimals={2} label="200 level 1st sem CGPA" />
             </dl>
           </div>
         </section>
@@ -295,31 +300,34 @@ function Index() {
         {/* About */}
         <section
           id="about"
+          aria-labelledby="about-heading"
           className="border-b-2 border-b-primary bg-surface py-20 sm:py-24"
         >
           <div className="section-shell">
-            <p className="eyebrow">About</p>
+            <h2 id="about-heading" className="eyebrow">
+              About
+            </h2>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-secondary-foreground">
-              I am a Computer Science student at Delta State University with a track
-              record of building products that solve real problems. Three years ago I
-              self taught Facebook Ads on YouTube and grew Conversion Alchemist into an
-              agency managing millions in ad spend. When I struggled academically this
-              year, I built MyAcumen, an offline first study OS that changed everything.
-              This semester I run a 5.0 GPA. I am applying to Upskill 4.0 because I know
-              what I have built, and I know what I need to scale it.
+              I am a Computer Science student at Delta State University with a track record of
+              building products that solve real problems. Three years ago I self taught Facebook Ads
+              on YouTube and grew Conversion Alchemist into an agency managing millions in ad spend.
+              When I struggled academically this year, I built MyAcumen, an offline first study OS
+              that changed everything. My 200 level first semester CGPA is 4.47, and I am expecting
+              a 5.0 this semester once results are released. I am applying to Upskill 4.0 because I
+              know what I have built, and I know what I need to scale it.
             </p>
           </div>
         </section>
 
         {/* Projects */}
-        <section id="work" className="py-20 sm:py-24">
+        <section id="work" aria-labelledby="work-heading" className="py-20 sm:py-24">
           <div className="section-shell">
             <p className="eyebrow">Selected Work</p>
-            <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
+            <h2 id="work-heading" className="mt-4 text-3xl font-bold sm:text-4xl">
               Three products, built while studying
             </h2>
 
-            <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {projects.map((project) => {
                 const Icon = project.icon;
                 return (
@@ -342,9 +350,7 @@ function Index() {
                     <div className="mt-6 grid grid-cols-3 gap-2">
                       {project.stats.map((stat) => (
                         <div key={stat.label} className="stat-chip">
-                          <div className="text-sm font-bold text-foreground">
-                            {stat.value}
-                          </div>
+                          <div className="text-sm font-bold text-foreground">{stat.value}</div>
                           <div className="mt-0.5 text-[0.65rem] text-muted-foreground">
                             {stat.label}
                           </div>
@@ -384,13 +390,15 @@ function Index() {
         </section>
 
         {/* CV */}
-        <section id="cv" className="bg-surface-raised py-20 sm:py-24">
+        <section id="cv" aria-labelledby="cv-heading" className="bg-surface-raised py-20 sm:py-24">
           <div className="section-shell">
             <p className="eyebrow">Credentials</p>
-            <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Curriculum Vitae</h2>
+            <h2 id="cv-heading" className="mt-4 text-3xl font-bold sm:text-4xl">
+              Curriculum Vitae
+            </h2>
             <p className="mt-4 max-w-2xl text-base text-muted-foreground">
-              Complete record of professional experience, technical skills, education,
-              and academic achievements.
+              Complete record of professional experience, technical skills, education, and academic
+              achievements.
             </p>
 
             <div className="mt-12 grid gap-5 sm:grid-cols-2">
@@ -400,10 +408,7 @@ function Index() {
                   <article key={card.title} className="card-panel p-6">
                     <div className="flex items-center gap-3">
                       <span className="inline-flex size-10 items-center justify-center rounded-lg bg-surface">
-                        <Icon
-                          aria-hidden="true"
-                          className="size-5 text-primary-bright"
-                        />
+                        <Icon aria-hidden="true" className="size-5 text-primary-bright" />
                       </span>
                       <h3 className="text-xl font-bold">{card.title}</h3>
                     </div>
@@ -438,10 +443,12 @@ function Index() {
         </section>
 
         {/* Skills */}
-        <section id="skills" className="py-20 sm:py-24">
+        <section id="skills" aria-labelledby="skills-heading" className="py-20 sm:py-24">
           <div className="section-shell">
             <p className="eyebrow">Capabilities</p>
-            <h2 className="mt-4 text-3xl font-bold sm:text-4xl">What I bring</h2>
+            <h2 id="skills-heading" className="mt-4 text-3xl font-bold sm:text-4xl">
+              What I bring
+            </h2>
             <div className="mt-12 grid gap-5 md:grid-cols-3">
               {skillGroups.map((group) => {
                 const Icon = group.icon;
@@ -460,19 +467,23 @@ function Index() {
         </section>
 
         {/* Results */}
-        <section id="results" className="bg-surface py-20 sm:py-24">
+        <section
+          id="results"
+          aria-labelledby="results-heading"
+          className="bg-surface py-20 sm:py-24"
+        >
           <div className="section-shell">
             <p className="eyebrow">Client Outcomes</p>
-            <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Evidence first</h2>
+            <h2 id="results-heading" className="mt-4 text-3xl font-bold sm:text-4xl">
+              Evidence first
+            </h2>
             <div className="mt-12 grid gap-5 md:grid-cols-3">
               {results.map((item) => (
                 <article key={item.headline} className="card-panel p-6">
                   <p className="font-display text-2xl font-bold text-primary-bright">
                     {item.headline}
                   </p>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {item.body}
-                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
                 </article>
               ))}
             </div>
@@ -480,10 +491,16 @@ function Index() {
         </section>
       </main>
 
-      <footer id="contact" className="border-t border-border py-16">
+      <footer
+        id="contact"
+        aria-labelledby="contact-heading"
+        className="border-t border-border py-16"
+      >
         <div className="section-shell grid gap-10 md:grid-cols-3">
           <div>
-            <h2 className="text-xl font-bold">Contact</h2>
+            <h2 id="contact-heading" className="text-xl font-bold">
+              Contact
+            </h2>
             <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
               <li>
                 <a
